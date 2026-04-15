@@ -1,0 +1,40 @@
+version: '3.9'
+services:
+  postgres:
+    image: postgres:16
+    container_name: chouse-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: chouse
+    ports:
+      - '5432:5432'
+    volumes:
+      - chouse_pg_data:/var/lib/postgresql/data
+
+  api:
+    build:
+      context: ./apps/api
+      dockerfile: Dockerfile
+    container_name: chouse-api
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    environment:
+      PORT: 3000
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: chouse
+      DB_SYNCHRONIZE: 'true'
+      JWT_SECRET: dev_secret
+      JWT_EXPIRES_IN: 7d
+      FCM_SERVER_KEY: TODO_REPLACE
+      GOOGLE_CLIENT_ID: TODO_REPLACE
+    ports:
+      - '3000:3000'
+
+volumes:
+  chouse_pg_data:

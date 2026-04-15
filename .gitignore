@@ -1,0 +1,10 @@
+node_modules
+dist
+.next
+coverage
+.env
+*.log
+.DS_Store
+apps/api/dist
+apps/api/node_modules
+apps/admin/node_modules
