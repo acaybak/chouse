@@ -17,9 +17,13 @@ Monorepo scaffold for **C House** loyalty application:
 
 Copy and edit:
 
+- `.env.example` → `.env` (used by Docker Compose for `JWT_SECRET`)
 - `apps/api/.env.example` → `apps/api/.env`
 - `apps/admin/.env.example` → `apps/admin/.env.local`
 - `apps/mobile/.env.example` (for mobile runtime setup)
+
+`GOOGLE_CLIENT_ID` can be created in Google Cloud Console (OAuth credentials).  
+`FCM_SERVER_KEY` / Firebase credentials can be created in Firebase Console (Cloud Messaging).
 
 ## Run with Docker (Postgres + API)
 
@@ -32,7 +36,7 @@ API runs at `http://localhost:3000`.
 ### Seed initial admin
 
 ```bash
-cd /home/runner/work/chouse/chouse/apps/api
+cd apps/api
 npm run seed
 ```
 
@@ -41,7 +45,7 @@ Default seeded admin email: `admin@chouse.local`.
 ## Run API locally
 
 ```bash
-cd /home/runner/work/chouse/chouse/apps/api
+cd apps/api
 npm install
 npm run start:dev
 ```
@@ -49,7 +53,7 @@ npm run start:dev
 ## Run Admin locally
 
 ```bash
-cd /home/runner/work/chouse/chouse/apps/admin
+cd apps/admin
 npm install
 npm run dev
 ```
@@ -59,7 +63,7 @@ Then open `http://localhost:3001` (or the port Next.js shows).
 ## Run Mobile locally
 
 ```bash
-cd /home/runner/work/chouse/chouse/apps/mobile
+cd apps/mobile
 flutter pub get
 flutter run
 ```

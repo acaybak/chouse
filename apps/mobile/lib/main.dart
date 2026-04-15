@@ -52,7 +52,7 @@ class OnboardingScreen extends StatefulWidget {
 class _OnboardingScreenState extends State<OnboardingScreen> {
   bool signedInWithGoogle = false;
   bool phoneVerified = false;
-  final phoneController = TextEditingController(text: '+905550000000');
+  final phoneController = TextEditingController();
   final otpController = TextEditingController();
 
   @override

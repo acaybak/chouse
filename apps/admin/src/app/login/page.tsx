@@ -22,7 +22,7 @@ export default function LoginPage() {
         body: JSON.stringify({
           email,
           fullName,
-          googleId: `mock-${email}`,
+          googleId: `mock-${crypto.randomUUID()}`,
           idToken: 'mock-id-token',
         }),
       });

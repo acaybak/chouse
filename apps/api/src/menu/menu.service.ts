@@ -47,6 +47,11 @@ export class MenuService {
   }
 
   async deleteCategory(id: string) {
+    const category = await this.categoriesRepository.findOne({ where: { id } });
+    if (!category) {
+      throw new NotFoundException('Menu category not found.');
+    }
+
     await this.categoriesRepository.delete({ id });
     return { success: true };
   }
@@ -66,7 +71,7 @@ export class MenuService {
     return this.itemsRepository.save(
       this.itemsRepository.create({
         ...dto,
-        priceTl: dto.priceTl.toFixed(2),
+        priceTl: this.formatPrice(dto.priceTl),
         pointsCost: dto.pointsCost ?? null,
         isFreebieEligible: dto.isFreebieEligible ?? false,
         isActive: dto.isActive ?? true,
@@ -84,7 +89,7 @@ export class MenuService {
 
     const updateDto = { ...dto };
     if (typeof updateDto.priceTl === 'number') {
-      item.priceTl = updateDto.priceTl.toFixed(2);
+      item.priceTl = this.formatPrice(updateDto.priceTl);
       delete updateDto.priceTl;
     }
 
@@ -93,7 +98,16 @@ export class MenuService {
   }
 
   async deleteItem(id: string) {
+    const item = await this.itemsRepository.findOne({ where: { id } });
+    if (!item) {
+      throw new NotFoundException('Menu item not found.');
+    }
+
     await this.itemsRepository.delete({ id });
     return { success: true };
+  }
+
+  private formatPrice(price: number) {
+    return price.toFixed(2);
   }
 }

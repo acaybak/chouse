@@ -1,6 +1,6 @@
 'use client';
 
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useCallback, useEffect, useState } from 'react';
 import { apiFetch } from '@/lib/api';
 
 type Category = { id: string; nameTr: string; nameEn: string };
@@ -15,7 +15,7 @@ export default function MenuPage() {
   const [priceTl, setPriceTl] = useState(120);
   const [error, setError] = useState('');
 
-  async function loadAll() {
+  const loadAll = useCallback(async () => {
     try {
       const [categoryData, itemData] = await Promise.all([
         apiFetch<Category[]>('/menu/admin/categories'),
@@ -29,7 +29,7 @@ export default function MenuPage() {
     } catch (loadError) {
       setError(loadError instanceof Error ? loadError.message : 'Failed to load menu');
     }
-  }
+  }, [categoryId]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -37,7 +37,7 @@ export default function MenuPage() {
     }, 0);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [loadAll]);
 
   async function createDefaultCategory() {
     await apiFetch('/menu/admin/categories', {

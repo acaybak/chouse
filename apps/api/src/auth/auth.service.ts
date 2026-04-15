@@ -3,6 +3,7 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
+import { randomInt } from 'crypto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
@@ -78,7 +79,7 @@ export class AuthService {
       throw new NotFoundException('User not found.');
     }
 
-    const otpCode = `${Math.floor(100000 + Math.random() * 900000)}`;
+    const otpCode = `${randomInt(100000, 999999 + 1)}`;
     const verification = this.phoneVerificationRepository.create({
       userId: user.id,
       phone: dto.phone,
