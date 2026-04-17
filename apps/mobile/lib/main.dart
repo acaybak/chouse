@@ -452,7 +452,7 @@ class ProfileTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const mockUserName = 'Ayse Demir';
+    const mockUserName = 'Ayşe Demir';
     const mockHandle = '@ayse';
 
     return ListView(
@@ -569,7 +569,7 @@ class UiText {
   String get appName => 'chouse';
   String get home => isTurkish ? 'Ana Sayfa' : 'Home';
   String get explore => isTurkish ? 'Keşfet' : 'Explore';
-  String get qr => isTurkish ? 'QR' : 'QR';
+  String get qr => 'QR';
   String get notifications => isTurkish ? 'Bildirimler' : 'Notifications';
   String get profile => isTurkish ? 'Profil' : 'Profile';
 
