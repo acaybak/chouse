@@ -457,8 +457,8 @@ class ProfileTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const _mockUserName = 'Ayşe Demir';
-    const _mockHandle = '@ayse';
+    const mockUserName = 'Ayşe Demir';
+    const mockHandle = '@ayse';
 
     return ListView(
       padding: const EdgeInsets.all(16),
@@ -470,8 +470,8 @@ class ProfileTab extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(_mockUserName, style: Theme.of(context).textTheme.titleMedium),
-                Text(_mockHandle, style: Theme.of(context).textTheme.bodySmall),
+                Text(mockUserName, style: Theme.of(context).textTheme.titleMedium),
+                Text(mockHandle, style: Theme.of(context).textTheme.bodySmall),
               ],
             ),
           ],
