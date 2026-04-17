@@ -24,7 +24,7 @@ void main() {
       const MaterialApp(
         home: HomeShell(
           isTurkish: true,
-          onLanguageChanged: _noopLanguageChanged,
+          onLanguageChanged: noopLanguageChanged,
         ),
       ),
     );
@@ -37,4 +37,4 @@ void main() {
   });
 }
 
-void _noopLanguageChanged(bool _) {}
+void noopLanguageChanged(bool _) {}

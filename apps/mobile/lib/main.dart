@@ -268,11 +268,31 @@ class _HomeShellState extends State<HomeShell> {
         selectedIndex: _index,
         onDestinationSelected: (value) => setState(() => _index = value),
         destinations: [
-          NavigationDestination(icon: const Icon(Icons.home_outlined), selectedIcon: const Icon(Icons.home), label: t.home),
-          NavigationDestination(icon: const Icon(Icons.grid_view_outlined), selectedIcon: const Icon(Icons.grid_view), label: t.explore),
-          NavigationDestination(icon: const Icon(Icons.qr_code_scanner_outlined), selectedIcon: const Icon(Icons.qr_code_scanner), label: t.qr),
-          NavigationDestination(icon: const Icon(Icons.favorite_border), selectedIcon: const Icon(Icons.favorite), label: t.notifications),
-          NavigationDestination(icon: const Icon(Icons.person_outline), selectedIcon: const Icon(Icons.person), label: t.profile),
+          NavigationDestination(
+            icon: const Icon(Icons.home_outlined),
+            selectedIcon: const Icon(Icons.home),
+            label: t.home,
+          ),
+          NavigationDestination(
+            icon: const Icon(Icons.grid_view_outlined),
+            selectedIcon: const Icon(Icons.grid_view),
+            label: t.explore,
+          ),
+          NavigationDestination(
+            icon: const Icon(Icons.qr_code_scanner_outlined),
+            selectedIcon: const Icon(Icons.qr_code_scanner),
+            label: t.qr,
+          ),
+          NavigationDestination(
+            icon: const Icon(Icons.favorite_border),
+            selectedIcon: const Icon(Icons.favorite),
+            label: t.notifications,
+          ),
+          NavigationDestination(
+            icon: const Icon(Icons.person_outline),
+            selectedIcon: const Icon(Icons.person),
+            label: t.profile,
+          ),
         ],
       ),
     );
@@ -432,6 +452,9 @@ class ProfileTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const mockUserName = 'Ayse Demir';
+    const mockHandle = '@ayse';
+
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
@@ -442,8 +465,8 @@ class ProfileTab extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Ayse Demir', style: Theme.of(context).textTheme.titleMedium),
-                Text('@ayse', style: Theme.of(context).textTheme.bodySmall),
+                Text(mockUserName, style: Theme.of(context).textTheme.titleMedium),
+                Text(mockHandle, style: Theme.of(context).textTheme.bodySmall),
               ],
             ),
           ],
