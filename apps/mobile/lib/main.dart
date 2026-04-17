@@ -82,6 +82,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
   bool _googleDone = false;
   String? _error;
 
+  bool get _canVerify => _googleDone && _phoneController.text.trim().isNotEmpty;
+
   @override
   void dispose() {
     _phoneController.dispose();
@@ -90,6 +92,13 @@ class _OnboardingPageState extends State<OnboardingPage> {
   }
 
   void _verifyOtp() {
+    if (_phoneController.text.trim().length < 10) {
+      setState(() {
+        _error = UiText(widget.isTurkish).invalidPhone;
+      });
+      return;
+    }
+
     if (_otpController.text.trim() == '123456') {
       widget.onAuthenticated();
       return;
@@ -172,6 +181,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                         TextField(
                           controller: _phoneController,
                           keyboardType: TextInputType.phone,
+                          onChanged: (_) => setState(() => _error = null),
                           decoration: InputDecoration(
                             border: const OutlineInputBorder(),
                             labelText: t.phoneLabel,
@@ -181,6 +191,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                         TextField(
                           controller: _otpController,
                           keyboardType: TextInputType.number,
+                          onChanged: (_) => setState(() => _error = null),
                           decoration: InputDecoration(
                             border: const OutlineInputBorder(),
                             labelText: t.otpLabel,
@@ -193,7 +204,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                         ],
                         const SizedBox(height: 12),
                         FilledButton(
-                          onPressed: _googleDone ? _verifyOtp : null,
+                          onPressed: _canVerify ? _verifyOtp : null,
                           child: Text(t.verifyButton),
                         ),
                       ],
@@ -229,6 +240,7 @@ class _HomeShellState extends State<HomeShell> {
   @override
   Widget build(BuildContext context) {
     final t = UiText(widget.isTurkish);
+    final tabTitles = [t.home, t.explore, t.qr, t.notifications, t.profile];
     final pages = [
       HomeTab(text: t),
       ExploreTab(text: t),
@@ -244,7 +256,7 @@ class _HomeShellState extends State<HomeShell> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          _index == 0 ? t.appName : [t.home, t.explore, t.qr, t.notifications, t.profile][_index],
+          _index == 0 ? t.appName : tabTitles[_index],
         ),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1),
@@ -531,7 +543,7 @@ class UiText {
 
   final bool isTurkish;
 
-  String get appName => isTurkish ? 'chouse' : 'chouse';
+  String get appName => 'chouse';
   String get home => isTurkish ? 'Ana Sayfa' : 'Home';
   String get explore => isTurkish ? 'Keşfet' : 'Explore';
   String get qr => isTurkish ? 'QR' : 'QR';
@@ -548,6 +560,7 @@ class UiText {
   String get otpLabel => isTurkish ? 'OTP kodu' : 'OTP code';
   String get otpHint => isTurkish ? 'Mock kod: 123456' : 'Mock code: 123456';
   String get verifyButton => isTurkish ? 'Doğrula ve devam et' : 'Verify and continue';
+  String get invalidPhone => isTurkish ? 'Geçerli bir telefon numarası girin.' : 'Enter a valid phone number.';
 
   String get walletCards => isTurkish ? 'Cüzdan kartları' : 'Wallet cards';
   String get featuredMenu => isTurkish ? 'Öne çıkan menü' : 'Featured menu';
