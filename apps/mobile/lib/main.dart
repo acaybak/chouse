@@ -457,7 +457,7 @@ class ProfileTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const mockUserName = 'Ayşe Demir';
+    const mockUserName = 'Ayse Demir';
     const mockHandle = '@ayse';
 
     return ListView(
