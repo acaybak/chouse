@@ -34,6 +34,14 @@ void main() {
     expect(find.text('QR'), findsOneWidget);
     expect(find.text('Bildirimler'), findsOneWidget);
     expect(find.text('Profil'), findsOneWidget);
+
+    await tester.tap(find.text('Keşfet'));
+    await tester.pumpAndSettle();
+    expect(find.text('Espresso'), findsOneWidget);
+
+    await tester.tap(find.text('Bildirimler'));
+    await tester.pumpAndSettle();
+    expect(find.text('Bugün'), findsOneWidget);
   });
 }
 

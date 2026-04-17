@@ -289,8 +289,8 @@ class _HomeShellState extends State<HomeShell> {
             label: t.qr,
           ),
           NavigationDestination(
-            icon: const Icon(Icons.favorite_border),
-            selectedIcon: const Icon(Icons.favorite),
+            icon: const Icon(Icons.notifications_outlined),
+            selectedIcon: const Icon(Icons.notifications),
             label: t.notifications,
           ),
           NavigationDestination(
@@ -457,8 +457,8 @@ class ProfileTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const mockUserName = 'Ayşe Demir';
-    const mockHandle = '@ayse';
+    const _kMockUserName = 'Ayşe Demir';
+    const _kMockHandle = '@ayse';
 
     return ListView(
       padding: const EdgeInsets.all(16),
@@ -470,8 +470,8 @@ class ProfileTab extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(mockUserName, style: Theme.of(context).textTheme.titleMedium),
-                Text(mockHandle, style: Theme.of(context).textTheme.bodySmall),
+                Text(_kMockUserName, style: Theme.of(context).textTheme.titleMedium),
+                Text(_kMockHandle, style: Theme.of(context).textTheme.bodySmall),
               ],
             ),
           ],
