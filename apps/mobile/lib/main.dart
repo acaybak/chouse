@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+const _mockOtpCode = '123456';
+const _minPhoneLength = 10;
+
 void main() {
   runApp(const ChouseApp());
 }
@@ -92,20 +95,22 @@ class _OnboardingPageState extends State<OnboardingPage> {
   }
 
   void _verifyOtp() {
-    if (_phoneController.text.trim().length < 10) {
+    if (_phoneController.text.trim().length < _minPhoneLength) {
       setState(() {
         _error = UiText(widget.isTurkish).invalidPhone;
       });
       return;
     }
 
-    if (_otpController.text.trim() == '123456') {
+    if (_otpController.text.trim() == _mockOtpCode) {
       widget.onAuthenticated();
       return;
     }
 
     setState(() {
-      _error = widget.isTurkish ? 'Kod hatalı. 123456 deneyin.' : 'Invalid code. Try 123456.';
+      _error = widget.isTurkish
+          ? 'Kod hatalı. $_mockOtpCode deneyin.'
+          : 'Invalid code. Try $_mockOtpCode.';
     });
   }
 
@@ -581,7 +586,7 @@ class UiText {
   String get smsTitle => isTurkish ? 'SMS doğrulama' : 'SMS verification';
   String get phoneLabel => isTurkish ? 'Telefon numarası' : 'Phone number';
   String get otpLabel => isTurkish ? 'OTP kodu' : 'OTP code';
-  String get otpHint => isTurkish ? 'Mock kod: 123456' : 'Mock code: 123456';
+  String get otpHint => isTurkish ? 'Mock kod: $_mockOtpCode' : 'Mock code: $_mockOtpCode';
   String get verifyButton => isTurkish ? 'Doğrula ve devam et' : 'Verify and continue';
   String get invalidPhone => isTurkish ? 'Geçerli bir telefon numarası girin.' : 'Enter a valid phone number.';
 
